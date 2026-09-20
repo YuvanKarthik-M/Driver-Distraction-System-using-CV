@@ -1,0 +1,195 @@
+QMainWindow {
+    background: #0a0b0d;
+}
+
+QWidget {
+    color: #f5f7fa;
+    font-family: "Segoe UI";
+}
+
+#title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #f5f7fa;
+}
+
+#activeStatus {
+    color: #35e58b;
+    background: #10271f;
+    border: 1px solid #245b47;
+    border-radius: 12px;
+    padding: 7px 13px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#cameraPanel {
+    background: #0e1115;
+    border: 1px solid #252d35;
+    border-radius: 16px;
+}
+
+#cameraPlaceholder {
+    background: #050608;
+    color: #555f6b;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#dashboard {
+    background: #101b18;
+    border: 1px solid #23473b;
+    border-radius: 16px;
+    padding: 10px;
+}
+
+#sectionTitle {
+    color: #79a99a;
+    font-size: 12px;
+    font-weight: 600;
+    qproperty-alignment: AlignCenter;
+}
+
+#systemStatus {
+    color: #35e58b;
+    font-size: 30px;
+    font-weight: 700;
+    padding: 8px;
+}
+
+#metricCard {
+    background: #162722;
+    border: 1px solid #285344;
+    border-radius: 12px;
+    padding: 6px;
+}
+
+#metricCard:hover {
+    background: #1b3029;
+    border: 1px solid #356b58;
+}
+
+#metricName {
+    color: #76a596;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+#metricValue {
+    color: #e7fff3;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+#alarm {
+    color: #35e58b;
+    background: #162d25;
+    border: 1px solid #2d624e;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px;
+}
+
+#iconButton {
+    background: #18243a;
+    border: 1px solid #2b4268;
+    border-radius: 11px;
+    min-height: 44px;
+    max-height: 44px;
+    padding: 8px;
+}
+
+#iconButton:hover {
+    background: #203253;
+    border: 1px solid #3c5d91;
+}
+
+#iconButton:pressed {
+    background: #142038;
+    border: 1px solid #4a6fa8;
+}
+
+#exitIconButton {
+    background: #3a181b;
+    border: 1px solid #702c32;
+    border-radius: 11px;
+    min-height: 44px;
+    max-height: 44px;
+    padding: 8px;
+}
+
+#exitIconButton:hover {
+    background: #512024;
+    border: 1px solid #a33b44;
+}
+
+#exitIconButton:pressed {
+    background: #671f25;
+    border: 1px solid #c44a54;
+}
+
+#calibrationWidget {
+    background: #10211c;
+    border: 1px solid #285344;
+    border-radius: 14px;
+}
+
+#calibrationTitle {
+    color: #79a99a;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+#calibrationIcon {
+    color: #35e58b;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+#calibrationInstruction {
+    color: #f5fff9;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+#calibrationDescription {
+    color: #82a99b;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+#calibrationState {
+    color: #35e58b;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+QProgressBar {
+    background: #183029;
+    border: 1px solid #285344;
+    border-radius: 5px;
+    height: 8px;
+}
+
+QProgressBar::chunk {
+    background: #35e58b;
+    border-radius: 5px;
+}
+
+QToolTip {
+    background: #171a1f;
+    color: #f5f7fa;
+    border: 1px solid #343a42;
+    padding: 6px 9px;
+    border-radius: 6px;
+}
+
+QPushButton:disabled {
+    background: #15171a;
+    border: 1px solid #25282c;
+    color: #555b62;
+}

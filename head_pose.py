@@ -18,7 +18,7 @@ FACE_3D = np.array([
 LANDMARKS = [1, 152, 33, 263, 61, 291]
 
 # Head pose settings
-CALIBRATION_TIME = 3.0
+CALIBRATION_TIME = 5.0
 YAW_THRESHOLD = 25.0
 YAW_RETURN_THRESHOLD = 20.0
 SMOOTHING_FRAMES = 7
@@ -157,6 +157,17 @@ class HeadPoseDetector:
 
             elapsed = time.time() - self.calibration_start_time
 
+            progress = min(
+                100,
+                int((elapsed / CALIBRATION_TIME) * 100)
+            )
+
+            if elapsed < 2.5:
+                calibration_message = "LOOK FORWARD"
+
+            else:
+                calibration_message = "CALIBRATING"
+
             if elapsed >= CALIBRATION_TIME:
                 self.baseline_yaw = np.median(
                     self.calibration_yaws
@@ -174,7 +185,9 @@ class HeadPoseDetector:
                 "smooth_yaw": smooth_yaw,
                 "relative_yaw": None,
                 "direction": "CALIBRATING",
-                "calibrated": False
+                "calibrated": False,
+                "calibration_progress": progress,
+                "calibration_message": calibration_message
             }
 
         relative_yaw = -(smooth_yaw - self.baseline_yaw)
