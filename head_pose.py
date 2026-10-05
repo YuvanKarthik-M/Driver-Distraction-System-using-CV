@@ -40,6 +40,16 @@ class HeadPoseDetector:
 
         self.current_direction = "FORWARD"
 
+    def reset_calibration(self):
+        self.yaw_history.clear()
+        self.calibration_yaws = []
+        self.calibration_start_time = time.time()
+        self.baseline_yaw = None
+        self.previous_rotation_vector = None
+        self.previous_translation_vector = None
+        self.previous_valid_yaw = None
+        self.current_direction = "FORWARD"
+
     def get_euler_angles(self, rotation_matrix):
         sy = math.sqrt(
             rotation_matrix[0, 0] ** 2 +

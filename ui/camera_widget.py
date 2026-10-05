@@ -1,5 +1,6 @@
 import cv2
 import time
+import threading
 import winsound
 import mediapipe as mp
 
@@ -109,7 +110,11 @@ class DetectionWorker(QObject):
                 "yaw": 0.0,
                 "direction": "NO FACE",
                 "status": "NO FACE",
-                "alert": False
+                "alert": False,
+                "eye_closed_total": self.detector.total_eye_closed_time,
+                "distraction_total": self.detector.total_distraction_time,
+                "closed_duration": 0.0,
+                "distraction_duration": 0.0
             })
             return
 
@@ -139,7 +144,11 @@ class DetectionWorker(QObject):
                 "status": "CALIBRATING",
                 "calibration_progress": pose["calibration_progress"],
                 "calibration_message": pose["calibration_message"],
-                "alert": False
+                "alert": False,
+                "eye_closed_total": self.detector.total_eye_closed_time,
+                "distraction_total": self.detector.total_distraction_time,
+                "closed_duration": 0.0,
+                "distraction_duration": 0.0
             }
 
             self.detection_ready.emit(
@@ -160,7 +169,11 @@ class DetectionWorker(QObject):
             "yaw": pose["relative_yaw"],
             "direction": direction,
             "status": detection["status"],
-            "alert": detection["alert"]
+            "alert": detection["alert"],
+            "eye_closed_total": detection["eye_closed_total"],
+            "distraction_total": detection["distraction_total"],
+            "closed_duration": detection["closed_duration"],
+            "distraction_duration": detection["distraction_duration"],
         }
 
         self.detection_ready.emit(detection_result)
@@ -169,11 +182,18 @@ class DetectionWorker(QObject):
             self.trigger_alarm()
 
     def trigger_alarm(self):
+        def _play_beep():
+            try:
+                winsound.Beep(1000, 400)
+            except Exception:
+                pass
+        threading.Thread(target=_play_beep, daemon=True).start()
 
-        try:
-            winsound.Beep(1000, 500)
-        except Exception:
-            pass
+    def recalibrate(self):
+        if self.head_pose is not None:
+            self.head_pose.reset_calibration()
+        if self.detector is not None:
+            self.detector.reset()
 
     def send_frame(self, frame):
 
@@ -254,6 +274,10 @@ class CameraWidget(QObject):
     def mute_alarm(self, value):
 
         self.worker.set_alarm_muted(value)
+
+    def recalibrate(self):
+
+        self.worker.recalibrate()
 
     def stop(self):
 
